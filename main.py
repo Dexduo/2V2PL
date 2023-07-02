@@ -11,6 +11,6 @@ from objects import *
 
 database()
 
-print(numberObjects.dbNumber)
+# print(numberObjects.dbNumber)
 # print(arrayObjects.dbs[0].name)
 showObjects()

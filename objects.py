@@ -11,10 +11,22 @@ class arrayObjects:
     tbs = []
     pgs = []
     rws = []
+    dbsNames = []
+    arsNames = []
+    tbsNames = []
+    pgsNames = []
+    rwsNames = []
 
 numberObjects = numberObjects()
 
 arrayObjects = arrayObjects()
+
+def showObjects():
+    print(arrayObjects.dbsNames)
+    print(arrayObjects.arsNames)
+    print(arrayObjects.tbsNames)
+    print(arrayObjects.pgsNames)
+    print(arrayObjects.rwsNames)
 
 class database:
     typelock = ""
@@ -24,6 +36,7 @@ class database:
         self.name = "DB"+str(numberObjects.dbNumber + 1)
         numberObjects.dbNumber += 1
         arrayObjects.dbs.append(self)
+        arrayObjects.dbsNames.append(self.name)
 
 class area:
     typelock = ""
@@ -33,15 +46,17 @@ class area:
     def __init__(self):
         self.name = "AR"+str(numberObjects.arNumber + 1)
         numberObjects.arNumber += 1
+        arrayObjects.arsNames.append(self.name)
 
 class table:
     typelock = ""
     children = []
     father = None
 
-    def __init__(self, number, father):
+    def __init__(self):
         self.name = "TB"+str(numberObjects.tbNumber + 1)
         numberObjects.tbNumber += 1
+        arrayObjects.tbsNames.append(self.name)
 
 class page:
     typelock = ""
@@ -51,6 +66,7 @@ class page:
     def __init__(self):
         self.name = "PG"+str(numberObjects.pgNumber + 1)
         numberObjects.pgNumber += 1
+        arrayObjects.pgsNames.append(self.name)
 
 class row:
     typelock = ""
@@ -60,3 +76,4 @@ class row:
     def __init__(self):
         self.name = "RW"+str(numberObjects.rwNumber + 1)
         numberObjects.rwNumber += 1
+        arrayObjects.rwsNames.append(self.name)

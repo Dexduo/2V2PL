@@ -16,16 +16,14 @@ from objects import *
 # area()
 
 for i in range(0, 1):
-    database()
+    newDatabase = database()
     for j in range(0, 2):
         newArea = area()
-        newArea.father = arrayObjects.dbs[i]
-        arrayObjects.dbs[i].children.append(newArea)
+        newArea.father(newDatabase)
+        newDatabase.child(newArea)
+        for k in range(0, 2):
+            newTable = table()
+            newTable.father(newArea)
+            
 
-print(arrayObjects.dbs[0].children[0].name)
-
-# print(numberObjects.dbNumber)
-# print(numberObjects.arNumber)
-# print(arrayObjects.dbs[0].name)
-# print(arrayObjects.dbs[0])
 showObjects()

@@ -37,6 +37,9 @@ class database:
         numberObjects.dbNumber += 1
         arrayObjects.dbs.append(self)
         arrayObjects.dbsNames.append(self.name)
+    
+    def child(self, area):
+        self.children.append(area)
 
 class area:
     typelock = ""
@@ -48,6 +51,12 @@ class area:
         numberObjects.arNumber += 1
         arrayObjects.ars.append(self)
         arrayObjects.arsNames.append(self.name)
+    
+    def child(self, table):
+        self.children.append(table)
+    
+    def father(self, database):
+        self.father = database
 
 class table:
     typelock = ""
@@ -59,6 +68,12 @@ class table:
         numberObjects.tbNumber += 1
         arrayObjects.tbs.append(self)
         arrayObjects.tbsNames.append(self.name)
+    
+    def child(self, page):
+        self.children.append(page)
+
+    def father(self, area):
+        self.father = area
 
 class page:
     typelock = ""
@@ -70,10 +85,15 @@ class page:
         numberObjects.pgNumber += 1
         arrayObjects.pgs.append(self)
         arrayObjects.pgsNames.append(self.name)
+    
+    def child(self, row):
+        self.children.append(row)
+    
+    def father(self, table):
+        self.father = table
 
 class row:
     typelock = ""
-    children = []
     father = None
 
     def __init__(self):
@@ -81,3 +101,6 @@ class row:
         numberObjects.rwNumber += 1
         arrayObjects.rws.append(self)
         arrayObjects.rwsNames.append(self.name)
+    
+    def father(self, page):
+        self.father = page

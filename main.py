@@ -9,14 +9,23 @@ from objects import *
 
 
 
-database()
-table()
-area()
-area()
-area()
+# database()
+# table()
+# area()
+# area()
+# area()
+
+for i in range(0, 1):
+    database()
+    for j in range(0, 2):
+        newArea = area()
+        newArea.father = arrayObjects.dbs[i]
+        arrayObjects.dbs[i].children.append(newArea)
+
+print(arrayObjects.dbs[0].children[0].name)
 
 # print(numberObjects.dbNumber)
-print(numberObjects.arNumber)
+# print(numberObjects.arNumber)
 # print(arrayObjects.dbs[0].name)
 # print(arrayObjects.dbs[0])
 showObjects()

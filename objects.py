@@ -46,6 +46,7 @@ class area:
     def __init__(self):
         self.name = "AR"+str(numberObjects.arNumber + 1)
         numberObjects.arNumber += 1
+        arrayObjects.ars.append(self)
         arrayObjects.arsNames.append(self.name)
 
 class table:
@@ -56,6 +57,7 @@ class table:
     def __init__(self):
         self.name = "TB"+str(numberObjects.tbNumber + 1)
         numberObjects.tbNumber += 1
+        arrayObjects.tbs.append(self)
         arrayObjects.tbsNames.append(self.name)
 
 class page:
@@ -66,6 +68,7 @@ class page:
     def __init__(self):
         self.name = "PG"+str(numberObjects.pgNumber + 1)
         numberObjects.pgNumber += 1
+        arrayObjects.pgs.append(self)
         arrayObjects.pgsNames.append(self.name)
 
 class row:
@@ -76,4 +79,5 @@ class row:
     def __init__(self):
         self.name = "RW"+str(numberObjects.rwNumber + 1)
         numberObjects.rwNumber += 1
+        arrayObjects.rws.append(self)
         arrayObjects.rwsNames.append(self.name)

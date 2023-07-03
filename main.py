@@ -10,7 +10,13 @@ from objects import *
 
 
 database()
+table()
+area()
+area()
+area()
 
 # print(numberObjects.dbNumber)
+print(numberObjects.arNumber)
 # print(arrayObjects.dbs[0].name)
+# print(arrayObjects.dbs[0])
 showObjects()

@@ -1,4 +1,5 @@
 from objects import *
+from utils import *
 
 # INSTRUÇÕES
 # -> Os objetos estarão em uma lista arrayObjects."tipo" onde tipo está entre os valores: dbs, ars, tbs, pgs, rws
@@ -15,6 +16,9 @@ from objects import *
 # area()
 # area()
 
+# Exemplo de transação
+trans1 = 'T2=  r1(AR1  )r1(TB2) w1(PG3) u4(RW2) w6(DB3) c4  '
+
 for i in range(0, 1):
     newDatabase = database()
     for j in range(0, 2):
@@ -27,3 +31,28 @@ for i in range(0, 1):
             
 
 showObjects()
+
+print('\n')
+print('-------------------------------------------------------------------------')
+print('Parser')
+print('-------------------------------------------------------------------------')
+print('\n')
+
+
+print('lista de operações da transação : ' + str(getOperations(trans1)))
+
+primeiraOperacao = getOperations(trans1)[0]
+print('primeira operação : ' + primeiraOperacao)
+
+ultimaOperacao = getOperations(trans1)[5]
+print('última operação : ' + ultimaOperacao)
+
+print('\n')
+print('-------------------------------------------------------------------------')
+print('Transformando a string que representa a operação em um objeto Operation')
+print('-------------------------------------------------------------------------')
+print('\n')
+op0 = Operation(primeiraOperacao)
+op5 = Operation(ultimaOperacao)
+print(f'operarionType : {op0.operationType}\n trasactionId : {op0.transactionId}\n dbObject : {op0.dbObject}')
+print(f'operarionType : {op5.operationType}\n trasactionId : {op5.transactionId}\n dbObject : {op5.dbObject}')

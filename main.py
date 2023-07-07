@@ -1,5 +1,6 @@
 from objects import *
-from utils import *
+from parser import *
+from dbStructure import *
 
 # INSTRUÇÕES
 # -> Os objetos estarão em uma lista arrayObjects."tipo" onde tipo está entre os valores: dbs, ars, tbs, pgs, rws
@@ -8,29 +9,14 @@ from utils import *
 # -> A cada objeto pode ser adicionado um pai ou vários filhos
 # -> A função showObjects exibe a lista de todos os objetos de cada tipo
 
+genStructure() #gerar a estrutura do banco de dados     
 
+showObjects() #exibe os objetos do banco de dados
 
-# database()
-# table()
-# area()
-# area()
-# area()
 
 # Exemplo de transação
 trans1 = 'T2=  r1(AR1  )r1(TB2) w1(PG3) u4(RW2) w6(DB3) c4  '
 
-for i in range(0, 1):
-    newDatabase = database()
-    for j in range(0, 2):
-        newArea = area()
-        newArea.father(newDatabase)
-        newDatabase.child(newArea)
-        for k in range(0, 2):
-            newTable = table()
-            newTable.father(newArea)
-            
-
-showObjects()
 
 print('\n')
 print('-------------------------------------------------------------------------')

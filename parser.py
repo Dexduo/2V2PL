@@ -1,3 +1,5 @@
+#ESSE ARQUIVO TRATA A ENTRADA E A TRANSFORMA EM UM CONJUNTO DE OPERAÇÕES
+
 import re
 class Operation:
     def __init__(self, operation):

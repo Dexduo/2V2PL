@@ -1,15 +1,17 @@
-# import networkx as nx
+import networkx as nx
 
-# graph = nx.DiGraph()
+graph = nx.DiGraph()
 
-# graph.add_node('1')
-# graph.add_node('2')
-# graph.add_edge('1', '2')
-# graph.add_edge('2', '1')
+graph.add_node('1')
+graph.add_node('2')
+graph.add_edge('1', '2')
+graph.add_edge('2', '1')
 
-# graph.add_node('1')
+graph.add_node('1')
+graph.remove_node('1')
 
-# cycle = list(nx.simple_cycles(graph))
+print(list(nx.simple_cycles(graph)))
+
 
 # # graph.add_node('1')
 # if(len(cycle) == 0):
@@ -26,5 +28,5 @@
 
 # iterate()
 
-for j in range(10-1, -1, -1):
-    print(j)
+# for j in range(10-1, -1, -1):
+#     print(j)

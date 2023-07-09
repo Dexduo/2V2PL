@@ -1,6 +1,7 @@
 from objects import *
 from parserOperations import *
 from dbStructure import *
+from tableSysLock import *
 
 # INSTRUÇÕES
 # -> Os objetos estarão em uma lista arrayObjects."tipo" onde tipo está entre os valores: dbs, ars, tbs, pgs, rws
@@ -17,7 +18,19 @@ genStructure() #gerar a estrutura do banco de dados
 
 
 # Exemplo de transação
-trans1 = 'T2=  R1(AR1  )R1(TB2) W1(PG3) U4(RW2) W6(DB3) C4  '
+trans1 = 'R1(AR1  )R1(TB2) W1(PG3) U4(RW2) W6(DB3) C4  '
+trans2 = 'R1(AR1)R2(AR2)W1(AR1)W2(AR2)'
 
-trans1 = operationsTable(trans1)
-
+trans1 = operationsTable(trans2)
+# print(trans1)
+tb = tableSysLock(trans1)
+tb.genSchedule()
+print('\n----------------- SYS LOCK ----------------')
+print(tb.table)
+print('----------------- -------- ----------------\n')
+print('----------------- FINAL SCHEDULE ----------------')
+print(tb.finalSchedule)
+print('----------------- -------- ----------------\n')
+print('----------------- WAIT LIST ----------------')
+print(tb.waitList)
+print('----------------- -------- ----------------')

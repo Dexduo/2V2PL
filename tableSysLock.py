@@ -2,37 +2,40 @@ import networkx as nx
 from lookForSysLock import *
 
 class tableSysLock:
-    initialSchedule = None
-    finalSchedule = None
+    initialSchedule = []
+    finalSchedule = []
     table = []
     waitList = []
     graph = nx.DiGraph()
     
     def __init__(self, initialSchedule):
-        self.initialSchdule = initialSchedule
+        self.initialSchedule = initialSchedule
 
-tableSysLock = tableSysLock()
+    # tableSysLock = tableSysLock()
+    def genSchedule(self):
+        for i in range(0, len(self.initialSchedule)):
+            newLine = []
+            newLine.append(self.initialSchedule[i][0])
+            newLine.append(self.initialSchedule[i][1])
+            newLine.append(self.initialSchedule[i][0]+'L')
 
-for i in range(0, len(tableSysLock.initialSchedule)):
-    newLine = []
-    newLine.append(tableSysLock.initialSchedule[i][0])
-    newLine.append(tableSysLock.initialSchedule[i][1])
-    newLine.append(tableSysLock.initialSchedule[i][0]+'L')
+            if(self.initialSchedule[i][2] == "W"):
+                result = receiveWrite(tableSysLock.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
+                if(result == False):
+                    print("Deadlock")
+            
+            if(self.initialSchedule[i][2] == "R"):
+                result = receiveRead(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
+                if(result == False):
+                    print("Deadlock")
 
-    if(tableSysLock.initialSchedule[i][2] == "W"):
-        result = receiveWrite(tableSysLock.table, tableSysLock.waitList, tableSysLock.initialSchedule[i], tableSysLock.finalSchedule, tableSysLock.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
-        if(result == False):
-            print("Deadlock")
-    
-    if(tableSysLock.initialSchedule[i][2] == "R"):
-        result = receiveRead(tableSysLock.table, tableSysLock.waitList, tableSysLock.initialSchedule[i], tableSysLock.finalSchedule, tableSysLock.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
-        if(result == False):
-            print("Deadlock")
+            if(self.initialSchedule[i][2] == "C"):
+                receiveCommit(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar uma escrita, adiciona uma linha de CL
+                print("commit")
+                # olharSeTodasDaTransacaoEstaoConcedidas(tableSysLock.table, tableSysLock.initialSchedule[i]) #se todas as operacoes desta transacao foram concedidas
 
-    if(tableSysLock.initialSchedule[i][2] == "C"):
-        receiveCommit(tableSysLock.table, tableSysLock.waitList, tableSysLock.initialSchedule[i], tableSysLock.finalSchedule, tableSysLock.graph) #se achar uma escrita, adiciona uma linha de CL
-        print("commit")
-        olharSeTodasDaTransacaoEstaoConcedidas(tableSysLock.table, tableSysLock.initialSchedule[i]) #se todas as operacoes desta transacao foram concedidas
-
-    if(tableSysLock.initialSchedule[i][2] == "U"):
-        procurarOcorrenciaDeOutraTransacaoSobreOObjeto()
+            if(self.initialSchedule[i][2] == "U"):
+                # procurarOcorrenciaDeOutraTransacaoSobreOObjeto()
+                result = receiveUpdate(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
+                if(result == False):
+                    print("Deadlock")

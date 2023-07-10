@@ -40,6 +40,6 @@ def operationsTable(transaction):
         operation = Operation(operation)
         operation = [operation.transactionId, operation.dbObject, operation.operationType]
         tableOperations.addOperation(operation)
-    print(tableOperations.tab)
+    # print(tableOperations.tab)
     return tableOperations.tab
 

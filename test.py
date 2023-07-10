@@ -1,16 +1,16 @@
-import networkx as nx
+# import networkx as nx
 
-graph = nx.DiGraph()
+# graph = nx.DiGraph()
 
-graph.add_node('1')
-graph.add_node('2')
-graph.add_edge('1', '2')
-graph.add_edge('2', '1')
+# graph.add_node('1')
+# graph.add_node('2')
+# graph.add_edge('1', '2')
+# graph.add_edge('2', '1')
 
-graph.add_node('1')
-graph.remove_node('1')
+# graph.add_node('1')
+# graph.remove_node('1')
 
-print(list(nx.simple_cycles(graph)))
+# print(list(nx.simple_cycles(graph)))
 
 
 # # graph.add_node('1')
@@ -30,3 +30,12 @@ print(list(nx.simple_cycles(graph)))
 
 # for j in range(10-1, -1, -1):
 #     print(j)
+
+# table = [
+#     [1], [2], [3], [1]
+# ]
+# for i in range(0, len(table)-1):
+#     if(table[i][0] == 1):
+#         del table[i]
+
+# print(table)

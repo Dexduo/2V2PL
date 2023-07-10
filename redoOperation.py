@@ -1,29 +1,51 @@
 from lookForSysLock import *
 
-def redoOperation(table, waitList, currentOperation, finalSchedule, graph):
+def redoOperation(table, waitList, finalSchedule, graph):
     grant = True
 
     for i in range(0, len(waitList)):
-        if i[2] == 'R':
-            for j in range(i, -1, -1):
-                if((i[2] == "CL") and (i[0] != table[j][0]) and (i[1] == table[j][1])):
-                    grant = False
-            if(grant == True):
-                i[3] = '1'
-            del waitList[i]
+        grant = True
 
-        if i[2] == 'W':
-            for j in range(i, -1, -1):
-                if((i[2] == "WL" or i[2] == "CL" ) and (i[0] != table[j][0]) and (i[1] == table[j][1])):
+        if waitList[i][2] == 'R':
+            for j in range(i-1, -1, -1):
+                if((table[j][2] == "CL") and (i[0] != table[j][0]) and (i[1] == table[j][1])):
                     grant = False
             if(grant == True):
-                i[3] = '1'
-            del waitList[i]
+                table[i][3] = '1'
+                finalSchedule.append(waitList[i])
+                del waitList[i]
 
-        if i[2] == 'C':
-            for j in range(i, -1, -1):
-                if((i[0] != table[j][0]) and (i[1] == table[j][1])):
+        if waitList[i][2] == 'W':
+            for j in range(i-1, -1, -1):
+                if((table[j][2] == "WL" or table[j][2] == "CL" ) and (table[i][0] != table[j][0]) and (table[i][1] == table[j][1])):
                     grant = False
             if(grant == True):
-                i[3] = '1'
-            del waitList[i]
+                table[i][3] = '1'
+                finalSchedule.append(waitList[i])
+                del waitList[i]
+
+        if waitList[i][2] == 'C':
+            for k in range(0, len(table)):
+                grant = True
+                print(table[k])
+                if((table[k][2] == "CL") and (table[k][3] == "3")):
+                    for j in range(k-1, -1, -1):
+                        if((table[j][2] == "RL") and (table[j][0] != table[k][0]) and (table[j][1] == table[k][1])):
+                            print("Deu errado")
+                            grant = False
+                            break
+                    if(grant == True):
+                        table[k][3] = '1'
+            
+            finishOperations = True
+            for l in range(0, len(table)):
+                if((table[l][0] == waitList[i][0]) and (table[l][3] == '3')):
+                    finishOperations = False
+            if(finishOperations == True):
+                finalSchedule.append(waitList[i])
+                graph.remove_node(waitList[i][0])
+                for l in range(0, len(table)-1):
+                    if(table[l][0] == waitList[i][0]):
+                        del table[l]
+                del waitList[i]
+                redoOperation(table, waitList, finalSchedule, graph)

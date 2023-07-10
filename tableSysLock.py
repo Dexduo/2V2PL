@@ -26,10 +26,9 @@ class tableSysLock:
                     print("Deadlock")
 
             if(self.initialSchedule[i][2] == "C"):
-                receiveCommit(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar uma escrita, adiciona uma linha de CL
-
-            # if(self.initialSchedule[i][2] == "U"):
-            #     procurarOcorrenciaDeOutraTransacaoSobreOObjeto()
-
+                result = receiveCommit(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar uma escrita, adiciona uma linha de CL
+                if(result == False):
+                    print("Deadlock")
+                    
             if(self.initialSchedule[i][2] == "U"):
                 receiveUpdate(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph)

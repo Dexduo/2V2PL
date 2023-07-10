@@ -7,7 +7,8 @@ def receiveWrite(table, waitList, currentOperation, finalSchedule, graph):
     newLine = []
 
     for i in reversed(table):
-        if((i[2] == "WL" or i[2] == "CL" or i[2] == "UL") and (i[0] != currentOperation[0]) and (i[1] == currentOperation[1])):
+        if((i[2] == "WL" or i[2] == "CL" or i[2] == "UL") and (i[0] != currentOperation[0]) and (i[1] == currentOperation[1]) and (i[3] == GRANTED_STATUS_CODE)):
+            print(f'trasaction Id: {i[0]}, db object: {i[1]}, operation type: {i[2]}, status code: {i[3]}')
             newLine.append(currentOperation[0])
             newLine.append(currentOperation[1])
             newLine.append(currentOperation[2]+'L')
@@ -25,27 +26,19 @@ def receiveWrite(table, waitList, currentOperation, finalSchedule, graph):
                 return True
         # ------------------------
         if((i[2] == "UL") and (i[0] == currentOperation[0]) and (i[1] == currentOperation[1] and i[3] == GRANTED_STATUS_CODE)):
+            print('estou aqui')
             i[2] == "WL"
             newLine.append(currentOperation[0])
             newLine.append(currentOperation[1])
             newLine.append(currentOperation[2]+'L')
             newLine.append(GRANTED_STATUS_CODE)
             finalSchedule.append(currentOperation)
-        
-        else:
-            newLine.append(currentOperation[0])
-            newLine.append(currentOperation[1])
-            newLine.append(currentOperation[2]+'L')
-            newLine.append(WAITING_STATUS_CODE)
-            table.append(newLine)
-            waitList.append(currentOperation)
 
             if(len(list(nx.simple_cycles(graph))) != 0):
                 # print("Deadlock")
                 return False
             else:
                 return True
-        # ------------------------    
 
     newLine.append(currentOperation[0])
     newLine.append(currentOperation[1])
@@ -59,7 +52,7 @@ def receiveRead(table, waitList, currentOperation, finalSchedule, graph):
     newLine = []
 
     for i in reversed(table):
-        if((i[2] == "CL") and (i[0] != currentOperation[0]) and (i[1] == currentOperation[1])):
+        if((i[2] == "CL") and (i[0] != currentOperation[0]) and (i[1] == currentOperation[1]) and (i[3] == GRANTED_STATUS_CODE)):
             newLine.append(currentOperation[0])
             newLine.append(currentOperation[1])
             newLine.append(currentOperation[2]+'L')
@@ -75,7 +68,7 @@ def receiveRead(table, waitList, currentOperation, finalSchedule, graph):
                 return False
             else:
                 return True
-    
+
     newLine.append(currentOperation[0])
     newLine.append(currentOperation[1])
     newLine.append(currentOperation[2]+'L')
@@ -91,7 +84,7 @@ def receiveCommit(table, waitList, currentOperation, finalSchedule, graph):
         if((table[i][2] == "WL") and (table[i][0] == currentOperation[0])):
             table[j][2] = "CL"
             for j in range(i-1, -1, -1):
-                if((table[j][2] == "RL") and (table[j][0] != currentOperation[0]) and (i[1] == currentOperation[1])):
+                if((table[j][2] == "RL") and (table[j][0] != currentOperation[0]) and (i[1] == currentOperation[1]) and (i[3] == GRANTED_STATUS_CODE)):
                     table[j][3] = "3"
 
             newLine.append(currentOperation[0])
@@ -119,9 +112,8 @@ def receiveCommit(table, waitList, currentOperation, finalSchedule, graph):
 
 def receiveUpdate(table, waitList, currentOperation, finalSchedule, graph):
     newLine = []
-
     for i in reversed(table):
-        if((i[2] == "WL" or i[2] == "CL" or i[2] == "UL" or i[2] == "RL") and (i[0] != currentOperation[0]) and (i[1] == currentOperation[1])):
+        if((i[2] == "WL" or i[2] == "CL" or i[2] == "UL") and (i[0] != currentOperation[0]) and (i[1] == currentOperation[1]) and (i[3] == GRANTED_STATUS_CODE)):
             newLine.append(currentOperation[0])
             newLine.append(currentOperation[1])
             newLine.append(currentOperation[2]+'L')

@@ -20,7 +20,7 @@ class tableSysLock:
             newLine.append(self.initialSchedule[i][0]+'L')
 
             if(self.initialSchedule[i][2] == "W"):
-                result = receiveWrite(tableSysLock.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
+                result = receiveWrite(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
                 if(result == False):
                     print("Deadlock")
             

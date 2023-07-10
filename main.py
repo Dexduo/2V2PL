@@ -28,5 +28,3 @@ tableSysLock = tableSysLock(trans1)
 print("Escalonamento final: " + str(tableSysLock.finalSchedule))
 print("Lista de Espera: " + str(tableSysLock.waitList))
 print("Syslockinfo: " + str(tableSysLock.table))
-
-

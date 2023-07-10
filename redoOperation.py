@@ -8,7 +8,7 @@ def redoOperation(table, waitList, finalSchedule, graph):
 
         if waitList[i][2] == 'R':
             for j in range(i-1, -1, -1):
-                if((table[j][2] == "CL") and (i[0] != table[j][0]) and (i[1] == table[j][1])):
+                if((table[j][2] == "CL") and (table[i][0] != table[j][0]) and (table[i][1] == table[j][1])):
                     grant = False
             if(grant == True):
                 table[i][3] = '1'

@@ -3,11 +3,13 @@ from lookForSysLock import *
 def redoOperation(table, waitList, finalSchedule, graph):
     grant = True
 
-    for i in range(0, len(waitList)):
+    # for i in range(0, len(waitList)):
+    for i in range(len(waitList)-1, -1, -1):
         grant = True
-
-        if waitList[i][2] == 'R':
+        if (len(waitList) != 0) and  (waitList[i][2] == 'R'):
             for j in range(i-1, -1, -1):
+                # num era melhor só chamar de novo o recieveRead
+                # i é um índice esse i[0] daqui debaixo não faz sentido
                 if((table[j][2] == "CL") and (i[0] != table[j][0]) and (i[1] == table[j][1])):
                     grant = False
             if(grant == True):
@@ -15,7 +17,7 @@ def redoOperation(table, waitList, finalSchedule, graph):
                 finalSchedule.append(waitList[i])
                 del waitList[i]
 
-        if waitList[i][2] == 'W':
+        if (len(waitList) != 0) and (waitList[i][2] == 'W'):
             for j in range(i-1, -1, -1):
                 if((table[j][2] == "WL" or table[j][2] == "CL" ) and (table[i][0] != table[j][0]) and (table[i][1] == table[j][1])):
                     grant = False
@@ -24,7 +26,7 @@ def redoOperation(table, waitList, finalSchedule, graph):
                 finalSchedule.append(waitList[i])
                 del waitList[i]
 
-        if waitList[i][2] == 'C':
+        if (len(waitList) != 0) and (waitList[i][2] == 'C'):
             for k in range(0, len(table)):
                 grant = True
                 # print(table[k])

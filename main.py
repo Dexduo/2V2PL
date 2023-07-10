@@ -20,12 +20,12 @@ genStructure() #gerar a estrutura do banco de dados
 # Exemplo de transação
 # trans1 = 'R1(AR1  )R1(TB2) W1(PG3) U4(RW2) W6(DB3) C4  '
 trans2 = 'R1(AR1)R2(AR2)W1(AR1)W2(AR2)W3(AR1)U3(AR2)'
-trans3 = 'R1(AR1)R2(AR2)U3(AR1)W1(AR1)W3(AR1)W2(AR2)'#C2C3C1' #exemplo de deadlock
+trans3 = 'R1(AR1)R2(AR2)U3(AR1)W1(AR1)W3(AR1)W2(AR2)C2C3C1' #exemplo de deadlock
 trans4 = 'R2(V)R1(X)W2(X)R3(V)R1(Y)W3(Y)R2(Z)W3(Z)C3C1C2'
 # schedule = 'R1(AR1)R2(AR1)W1(AR1)C1C2'
 schedule = 'R2(AR1)R1(AR2)W2(AR2)R3(AR1)R1(TB1)W3(TB1)R2(TB2)W3(TB2)C3C1C2'
 
-trans1 = operationsTable(schedule)
+trans1 = operationsTable(trans3)
 
 tableSysLock = tableSysLock(trans1)
 print("Escalonamento final: " + str(tableSysLock.finalSchedule))

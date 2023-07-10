@@ -10,14 +10,12 @@ class tableSysLock:
     
     def __init__(self, initialSchedule):
         self.initialSchedule = initialSchedule
-
-    # tableSysLock = tableSysLock()
+        self.genSchedule()
+    
     def genSchedule(self):
         for i in range(0, len(self.initialSchedule)):
-            newLine = []
-            newLine.append(self.initialSchedule[i][0])
-            newLine.append(self.initialSchedule[i][1])
-            newLine.append(self.initialSchedule[i][0]+'L')
+
+            self.graph.add_node(self.initialSchedule[i][0])
 
             if(self.initialSchedule[i][2] == "W"):
                 result = receiveWrite(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
@@ -30,12 +28,9 @@ class tableSysLock:
                     print("Deadlock")
 
             if(self.initialSchedule[i][2] == "C"):
-                receiveCommit(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar uma escrita, adiciona uma linha de CL
-                print("commit")
-                # olharSeTodasDaTransacaoEstaoConcedidas(tableSysLock.table, tableSysLock.initialSchedule[i]) #se todas as operacoes desta transacao foram concedidas
-
-            if(self.initialSchedule[i][2] == "U"):
-                # procurarOcorrenciaDeOutraTransacaoSobreOObjeto()
-                result = receiveUpdate(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
+                result = receiveCommit(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar uma escrita, adiciona uma linha de CL
                 if(result == False):
                     print("Deadlock")
+
+            if(self.initialSchedule[i][2] == "U"):
+                receiveUpdate(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph)

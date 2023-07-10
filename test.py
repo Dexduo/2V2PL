@@ -40,16 +40,22 @@
 
 # print(table)´
 
-table = [
-    [1], [1], [1]
-]
-# 5, 2, 1
-elementsToDelete = []
+# table = [
+#     [1], [1], [1]
+# ]
+# # 5, 2, 1
+# elementsToDelete = []
 
-for i in range(0, len(table)):
-    if(table[i][0] == 2):
-        del table[i]
-    if(i==len(table)-1):
-        break
+# for i in range(0, len(table)):
+#     if(table[i][0] == 2):
+#         del table[i]
+#     if(i==len(table)-1):
+#         break
 
-print(table)
+# print(table)
+
+list = ['1', None, 'C']
+
+print(list[0])
+print(list[1])
+print(list[2])

@@ -43,3 +43,7 @@ def operationsTable(transaction):
     print(tableOperations.tab)
     return tableOperations.tab
 
+# def parserFinalSchedule(finalSchedule):
+#     string = None
+#     for i in range(0, len(finalSchedule)):
+#         string = string+str()

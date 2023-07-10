@@ -25,6 +25,9 @@ schedule = 'R2(AR1)R1(AR2)W2(AR2)R3(AR1)R1(TB1)W3(TB1)R2(TB2)W3(TB2)C3C1C2'
 trans1 = operationsTable(schedule)
 
 tableSysLock = tableSysLock(trans1)
+
+# finalSchedule = 
+
 print("Lista de Espera: " + str(tableSysLock.waitList))
 print("Syslockinfo: " + str(tableSysLock.table))
 print("Escalonamento final: " + str(tableSysLock.finalSchedule))

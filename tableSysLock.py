@@ -34,3 +34,5 @@ class tableSysLock:
 
             if(self.initialSchedule[i][2] == "U"):
                 receiveUpdate(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph)
+                if(result == False):
+                    print("Deadlock")

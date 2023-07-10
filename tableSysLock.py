@@ -21,18 +21,22 @@ class tableSysLock:
                 result = receiveWrite(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
                 if(result == False):
                     print("Deadlock")
+                    break
             
             if(self.initialSchedule[i][2] == "R"):
                 result = receiveRead(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
                 if(result == False):
                     print("Deadlock")
+                    break
 
             if(self.initialSchedule[i][2] == "C"):
                 result = receiveCommit(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar uma escrita, adiciona uma linha de CL
                 if(result == False):
                     print("Deadlock")
+                    break
 
             if(self.initialSchedule[i][2] == "U"):
                 receiveUpdate(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph)
                 if(result == False):
                     print("Deadlock")
+                    break

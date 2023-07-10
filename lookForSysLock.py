@@ -17,7 +17,7 @@ def receiveWrite(table, waitList, currentOperation, finalSchedule, graph):
             graph.add_edge(str(i[0]), currentOperation[0])
 
             if(len(list(nx.simple_cycles(graph))) != 0):
-                # print("Deadlock")
+                print("Deadlock")
                 return False
             else:
                 return True
@@ -46,7 +46,7 @@ def receiveRead(table, waitList, currentOperation, finalSchedule, graph):
             graph.add_edge(str(i[0]), currentOperation[0])
 
             if(len(list(nx.simple_cycles(graph))) != 0):
-                # print("Deadlock")
+                print("Deadlock")
                 return False
             else:
                 return True
@@ -80,7 +80,7 @@ def receiveCommit(table, waitList, currentOperation, finalSchedule, graph):
     if(commitWait == True):
         waitList.append(currentOperation)
         if(len(list(nx.simple_cycles(graph))) != 0):
-            # print("Deadlock")
+            print("Deadlock")
             return False
         else:
             return True
@@ -92,9 +92,10 @@ def receiveCommit(table, waitList, currentOperation, finalSchedule, graph):
         if(finishOperations == True):
             finalSchedule.append(currentOperation)
             graph.remove_node(currentOperation[0])
-            for i in range(0, len(table)-1):
+            for i in range(len(table)-1, -1, -1):
                 if(table[i][0] == currentOperation[0]):
                     del table[i]
-            print("Commit da transação "+str(currentOperation[0]))
+                # print("Tamanho da syslock: "+ str(len(table)))
+            # print("Commit da transação "+str(currentOperation[0]))
             redoOperation(table, waitList, finalSchedule, graph)
             #A redoOperation vai pegar e tentar fazer as operações que estão na lista de espera

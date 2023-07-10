@@ -15,6 +15,8 @@ class tableSysLock:
     def genSchedule(self):
         for i in range(0, len(self.initialSchedule)):
 
+            self.graph.add_node(self.initialSchedule[i][0])
+
             if(self.initialSchedule[i][2] == "W"):
                 result = receiveWrite(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar converte update em WL, senão coloca mais uma linha de WL
                 if(result == False):
@@ -29,6 +31,6 @@ class tableSysLock:
                 result = receiveCommit(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph) #se achar uma escrita, adiciona uma linha de CL
                 if(result == False):
                     print("Deadlock")
-                    
+
             if(self.initialSchedule[i][2] == "U"):
                 receiveUpdate(self.table, self.waitList, self.initialSchedule[i], self.finalSchedule, self.graph)

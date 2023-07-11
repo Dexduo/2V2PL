@@ -54,8 +54,12 @@
 
 # print(table)
 
-list = ['1', None, 'C']
+# list = ['1', None, 'C']
 
-print(list[0])
-print(list[1])
-print(list[2])
+# print(list[0])
+# print(list[1])
+# print(list[2])
+
+# entrada = input("Digite o escalonamento: ")
+
+# print(entrada.upper())

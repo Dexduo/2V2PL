@@ -34,6 +34,7 @@ def getOperations(transaction):
     return operationsList
 
 def operationsTable(transaction):
+    transaction = transaction.upper()
     operations = getOperations(transaction)
     for i in range(0, len(operations)):
         operation = operations[i]

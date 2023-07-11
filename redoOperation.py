@@ -3,19 +3,19 @@ from lookForSysLock import *
 def redoOperation(table, waitList, finalSchedule, graph):
     grant = True
 
-    for i in range(0, len(waitList)):
+    for i in range(len(waitList)-1, -1, -1):
         grant = True
-
         if waitList[i][2] == 'R':
+            
             for j in range(i-1, -1, -1):
-                if((table[j][2] == "CL") and (table[i][0] != table[j][0]) and (table[i][1] == table[j][1])):
+                if((table[j][2] == "CL" or table[j][2] == "UL") and (table[i][0] != table[j][0]) and (table[i][1] == table[j][1])):
                     grant = False
             if(grant == True):
                 table[i][3] = '1'
                 finalSchedule.append(waitList[i])
                 del waitList[i]
 
-        if waitList[i][2] == 'W':
+        elif waitList[i][2] == 'W':
             for j in range(i-1, -1, -1):
                 if((table[j][2] == "WL" or table[j][2] == "CL" ) and (table[i][0] != table[j][0]) and (table[i][1] == table[j][1])):
                     grant = False
@@ -24,7 +24,7 @@ def redoOperation(table, waitList, finalSchedule, graph):
                 finalSchedule.append(waitList[i])
                 del waitList[i]
 
-        if waitList[i][2] == 'C':
+        elif waitList[i][2] == 'C':
             for k in range(0, len(table)):
                 grant = True
                 # print(table[k])

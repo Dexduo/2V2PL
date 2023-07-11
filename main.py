@@ -19,12 +19,13 @@ genStructure() #gerar a estrutura do banco de dados
 
 # Exemplo de transação
 # trans1 = 'T2=  R1(AR1  )R1(TB2) W1(PG3) U4(RW2) W6(DB3) C4  '
+trans2 = 'R1(TB1)R2(AR1)U3(TB1)W2(AR1)R4(TB1)W3(TB1)C3C1C2C4'
 # schedule = 'R1(AR1)R2(AR1)W1(AR1)C1C2'
-schedule = 'R2(AR1)R1(AR2)W2(AR2)R3(AR1)R1(TB1)W3(TB1)R2(TB2)W3(TB2)C3C1C2'
+# schedule = 'R2(AR1)R1(AR2)W2(AR2)R3(AR1)R1(TB1)W3(TB1)R2(TB2)W3(TB2)C3C1C2'
+schedule = input('Digite o escalonamento na forma: R1(AR1)R2(AR1)W1(AR1)C1C2\n')
+schedule = operationsTable(schedule)
 
-trans1 = operationsTable(schedule)
-
-tableSysLock = tableSysLock(trans1)
+tableSysLock = tableSysLock(schedule)
 
 # finalSchedule = 
 
